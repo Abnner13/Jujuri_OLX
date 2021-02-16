@@ -4,9 +4,11 @@ import 'package:jujuri_mobx/Components/CustomDrawer/CustomDrawer.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      drawer: CustomDrawer(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        drawer: CustomDrawer(),
+      ),
     );
   }
 }

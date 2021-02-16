@@ -30,9 +30,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Jujuri',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Colors.purple,
+        scaffoldBackgroundColor: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(elevation: 0),
+        cursorColor: Colors.orange,
       ),
       home: BaseScreen(),
     );
