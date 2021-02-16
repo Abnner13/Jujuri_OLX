@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jujuri_mobx/screens/Base/BaseScreen.dart';
+import 'package:jujuri_mobx/stores/PageStore.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeParse();
+  setupLocators();
   runApp(MyApp());
+}
+
+void setupLocators() {
+  GetIt.I.registerSingleton(PageStore());
 }
 
 Future<void> initializeParse() async {
