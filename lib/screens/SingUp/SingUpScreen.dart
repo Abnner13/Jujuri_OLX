@@ -38,6 +38,7 @@ class SingUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_) {
                         return TextField(
+                          enabled: !singUpStore.loading,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Exemplo: Joao S.',
@@ -56,6 +57,7 @@ class SingUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_) {
                         return TextField(
+                          enabled: !singUpStore.loading,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Exemplo: Joao@Gmail.com',
@@ -76,6 +78,7 @@ class SingUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_) {
                         return TextField(
+                          enabled: !singUpStore.loading,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Exemplo: (99) 99999-9999',
@@ -99,6 +102,7 @@ class SingUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_) {
                         return TextField(
+                          enabled: !singUpStore.loading,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             isDense: true,
@@ -117,6 +121,7 @@ class SingUpScreen extends StatelessWidget {
                     Observer(
                       builder: (_) {
                         return TextField(
+                          enabled: !singUpStore.loading,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             isDense: true,
@@ -127,18 +132,28 @@ class SingUpScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 20, bottom: 12),
-                      height: 40,
-                      child: RaisedButton(
-                        color: Colors.orange,
-                        child: Text('CADASTE-SE'),
-                        textColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        onPressed: () {},
-                      ),
+                    Observer(
+                      builder: (_) {
+                        return Container(
+                          margin: const EdgeInsets.only(top: 20, bottom: 12),
+                          height: 40,
+                          child: RaisedButton(
+                            color: Colors.orange,
+                            disabledColor: Colors.orange.withAlpha(120),
+                            child: singUpStore.loading
+                                ? CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation(Colors.white),
+                                  )
+                                : Text('CADASTE-SE'),
+                            textColor: Colors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            onPressed: singUpStore.singUpPressed,
+                          ),
+                        );
+                      },
                     ),
                     Divider(color: Colors.black),
                     Padding(

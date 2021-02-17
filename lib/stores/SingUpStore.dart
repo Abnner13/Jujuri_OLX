@@ -86,4 +86,23 @@ abstract class _SingUpStore with Store {
     else
       return 'Senhs não coincidem';
   }
+
+  @computed
+  bool get isFormValid =>
+      nameValid && emailValid && phoneValid && pass1Valid && pass2Valid;
+
+  @observable
+  bool loading = false;
+
+  @computed
+  Function get singUpPressed => (isFormValid && !loading) ? _singUp : null;
+
+  @action
+  Future<void> _singUp() async {
+    loading = true;
+
+    await Future.delayed(Duration(seconds: 3));
+
+    loading = false;
+  }
 }
