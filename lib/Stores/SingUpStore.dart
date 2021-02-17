@@ -1,3 +1,5 @@
+import 'package:jujuri_mobx/Models/UserModel.dart';
+import 'package:jujuri_mobx/Repositories/UserRepository.dart';
 import 'package:jujuri_mobx/helpers/extensions.dart';
 import 'package:mobx/mobx.dart';
 part 'SingUpStore.g.dart';
@@ -101,8 +103,14 @@ abstract class _SingUpStore with Store {
   Future<void> _singUp() async {
     loading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    final user = UserModel(
+      name: name,
+      email: email,
+      phone: phone,
+      password: pass1,
+    );
 
+    await UserRepository().signUp(user);
     loading = false;
   }
 }
