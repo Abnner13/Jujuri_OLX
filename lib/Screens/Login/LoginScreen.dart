@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jujuri_mobx/screens/SingUp/SingUpScreen.dart';
+import 'package:jujuri_mobx/Screens/SingUp/SingUpScreen.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

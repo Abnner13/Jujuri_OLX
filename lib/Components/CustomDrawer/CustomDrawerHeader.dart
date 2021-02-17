@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jujuri_mobx/screens/Login/LoginScreen.dart';
+import 'package:jujuri_mobx/Screens/Login/LoginScreen.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
   @override

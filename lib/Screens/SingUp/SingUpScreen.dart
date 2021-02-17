@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:jujuri_mobx/screens/Login/LoginScreen.dart';
-import 'package:jujuri_mobx/screens/SingUp/components/FieldTitle.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-import 'package:jujuri_mobx/stores/SingUpStore.dart';
+import 'package:jujuri_mobx/Stores/SingUpStore.dart';
+
+import 'components/FieldTitle.dart';
 
 class SingUpScreen extends StatelessWidget {
   final singUpStore = SingUpStore();

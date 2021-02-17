@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jujuri_mobx/Components/CustomDrawer/PageTile.dart';
-import 'package:jujuri_mobx/stores/PageStore.dart';
+import 'package:jujuri_mobx/Stores/PageStore.dart';
 
 class PageSection extends StatelessWidget {
   final pageStore = GetIt.I<PageStore>();
