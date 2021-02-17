@@ -8,7 +8,7 @@ class CustomDrawerHeader extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pop();
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => LoginSreen()));
+            .push(MaterialPageRoute(builder: (_) => LoginScreen()));
       },
       child: Container(
         color: Colors.purple,
