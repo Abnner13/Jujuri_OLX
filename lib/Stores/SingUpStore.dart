@@ -96,6 +96,9 @@ abstract class _SingUpStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String error;
+
   @computed
   Function get singUpPressed => (isFormValid && !loading) ? _singUp : null;
 
@@ -110,7 +113,12 @@ abstract class _SingUpStore with Store {
       password: pass1,
     );
 
-    await UserRepository().signUp(user);
+    try {
+      final resultUser = await UserRepository().signUp(user);
+      print(resultUser);
+    } catch (e) {
+      error = e;
+    }
     loading = false;
   }
 }

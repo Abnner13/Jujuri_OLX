@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:jujuri_mobx/Stores/SingUpStore.dart';
 
+import 'components/ErrorBox.dart';
 import 'components/FieldTitle.dart';
 
 class SingUpScreen extends StatelessWidget {
@@ -31,6 +32,14 @@ class SingUpScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    Observer(
+                      builder: (_) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: ErrorBox(message: singUpStore.error),
+                        );
+                      },
+                    ),
                     FieldTitle(
                       title: 'Apelido  ',
                       subTitle: 'Como Aparecerá seus anúncios',
