@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:jujuri_mobx/Screens/SingUp/SingUpScreen.dart';
+import 'package:jujuri_mobx/Screens/SingUp/components/ErrorBox.dart';
 import 'package:jujuri_mobx/Stores/LoginStore.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -36,6 +37,12 @@ class LoginScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 16, color: Colors.grey[900]),
                     ),
+                    Observer(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: ErrorBox(message: loginStore.error),
+                      );
+                    }),
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 3, bottom: 4, top: 8),

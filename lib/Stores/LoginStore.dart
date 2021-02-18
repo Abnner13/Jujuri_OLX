@@ -1,3 +1,4 @@
+import 'package:jujuri_mobx/Repositories/UserRepository.dart';
 import 'package:mobx/mobx.dart';
 import 'package:jujuri_mobx/helpers/extensions.dart';
 
@@ -33,11 +34,18 @@ abstract class _LoginStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String error;
+
   @action
   Future<void> _login() async {
     loading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    try {
+      final user = await UserRepository().loginWithEmail(email, password);
+    } catch (e) {
+      error = e;
+    }
 
     loading = false;
   }

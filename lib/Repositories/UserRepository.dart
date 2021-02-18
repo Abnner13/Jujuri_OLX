@@ -20,6 +20,18 @@ class UserRepository {
     }
   }
 
+  Future<UserModel> loginWithEmail(String email, String password) async {
+    final parseUser = ParseUser(email, password, null);
+
+    final response = await parseUser.login();
+
+    if (response.success) {
+      return mapParseToUserModel(response.result);
+    } else {
+      return Future.error(ParseErrors.getDescription(response.error.code));
+    }
+  }
+
   UserModel mapParseToUserModel(ParseUser parseUser) {
     return UserModel(
       id: parseUser.objectId,
