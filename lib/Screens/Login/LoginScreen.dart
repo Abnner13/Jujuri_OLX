@@ -2,9 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:jujuri_mobx/Screens/SingUp/SingUpScreen.dart';
+import 'package:jujuri_mobx/Stores/LoginStore.dart';
 
 class LoginScreen extends StatelessWidget {
+  final loginStore = LoginStore();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,12 +48,18 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        isDense: true,
-                      ),
-                      keyboardType: TextInputType.emailAddress,
+                    Observer(
+                      builder: (_) {
+                        return TextField(
+                          enabled: !loginStore.loading,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              isDense: true,
+                              errorText: loginStore.emailError),
+                          keyboardType: TextInputType.emailAddress,
+                          onChanged: loginStore.setemail,
+                        );
+                      },
                     ),
                     const SizedBox(height: 16),
                     Padding(
@@ -82,26 +91,41 @@ class LoginScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        isDense: true,
-                      ),
-                      obscureText: true,
+                    Observer(
+                      builder: (_) {
+                        return TextField(
+                          enabled: !loginStore.loading,
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                            errorText: loginStore.passwordError,
+                          ),
+                          obscureText: true,
+                          onChanged: loginStore.setpassword,
+                        );
+                      },
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 20, bottom: 12),
-                      height: 40,
-                      child: RaisedButton(
-                        color: Colors.orange,
-                        child: Text('ENTRAR'),
-                        textColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        onPressed: () {},
-                      ),
-                    ),
+                    Observer(builder: (_) {
+                      return Container(
+                        margin: const EdgeInsets.only(top: 20, bottom: 12),
+                        height: 40,
+                        child: RaisedButton(
+                          color: Colors.orange,
+                          disabledColor: Colors.orange.withAlpha(120),
+                          child: loginStore.loading
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : Text('ENTRAR'),
+                          textColor: Colors.white,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          onPressed: loginStore.loginPressed,
+                        ),
+                      );
+                    }),
                     Divider(color: Colors.black),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
