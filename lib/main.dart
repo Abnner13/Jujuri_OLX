@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jujuri_mobx/Screens/Base/BaseScreen.dart';
 import 'package:jujuri_mobx/Stores/PageStore.dart';
+import 'package:jujuri_mobx/Stores/UserManegerStore.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 void main() async {
@@ -13,6 +14,7 @@ void main() async {
 
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
+  GetIt.I.registerSingleton(UserManegerStore());
 }
 
 Future<void> initializeParse() async {

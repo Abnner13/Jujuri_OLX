@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jujuri_mobx/Screens/Login/LoginScreen.dart';
+import 'package:jujuri_mobx/Stores/PageStore.dart';
+import 'package:jujuri_mobx/Stores/UserManegerStore.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
+  final UserManegerStore usermanegerStore = GetIt.I<UserManegerStore>();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pop();
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => LoginScreen()));
+        if (usermanegerStore.isLoggedIn) {
+          GetIt.I<PageStore>().setPage(4);
+        } else {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => LoginScreen()));
+        }
       },
       child: Container(
         color: Colors.purple,
@@ -24,7 +32,9 @@ class CustomDrawerHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Acesse sua conta agora!',
+                    usermanegerStore.isLoggedIn
+                        ? usermanegerStore.user.name
+                        : 'Acesse sua conta agora!',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -32,7 +42,9 @@ class CustomDrawerHeader extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Clique aqui',
+                    usermanegerStore.isLoggedIn
+                        ? usermanegerStore.user.email
+                        : 'Clique aqui',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,

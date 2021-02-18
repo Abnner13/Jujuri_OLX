@@ -1,4 +1,6 @@
+import 'package:get_it/get_it.dart';
 import 'package:jujuri_mobx/Repositories/UserRepository.dart';
+import 'package:jujuri_mobx/Stores/UserManegerStore.dart';
 import 'package:mobx/mobx.dart';
 import 'package:jujuri_mobx/helpers/extensions.dart';
 
@@ -43,6 +45,7 @@ abstract class _LoginStore with Store {
 
     try {
       final user = await UserRepository().loginWithEmail(email, password);
+      GetIt.I<UserManegerStore>().setuser(user);
     } catch (e) {
       error = e;
     }

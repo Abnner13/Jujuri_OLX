@@ -1,5 +1,7 @@
+import 'package:get_it/get_it.dart';
 import 'package:jujuri_mobx/Models/UserModel.dart';
 import 'package:jujuri_mobx/Repositories/UserRepository.dart';
+import 'package:jujuri_mobx/Stores/UserManegerStore.dart';
 import 'package:jujuri_mobx/helpers/extensions.dart';
 import 'package:mobx/mobx.dart';
 part 'SingUpStore.g.dart';
@@ -115,7 +117,7 @@ abstract class _SingUpStore with Store {
 
     try {
       final resultUser = await UserRepository().signUp(user);
-      print(resultUser);
+      GetIt.I<UserManegerStore>().setuser(resultUser);
     } catch (e) {
       error = e;
     }
