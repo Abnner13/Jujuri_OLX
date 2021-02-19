@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jujuri_mobx/Components/CustomDrawer/CustomDrawer.dart';
 import 'package:jujuri_mobx/Screens/Create/components/ImagesField.dart';
+import 'package:jujuri_mobx/Stores/CreateStore.dart';
 
 class CreateScreen extends StatelessWidget {
-  final labelStyle = TextStyle(
-    fontWeight: FontWeight.w800,
-    color: Colors.grey,
-    fontSize: 18,
-  );
-  final contentPadding = const EdgeInsets.fromLTRB(16, 10, 12, 10);
+  final createStore = CreateStore();
+
   @override
   Widget build(BuildContext context) {
+    final labelStyle = TextStyle(
+      fontWeight: FontWeight.w800,
+      color: Colors.grey,
+      fontSize: 18,
+    );
+    final contentPadding = const EdgeInsets.fromLTRB(16, 10, 12, 10);
     return Scaffold(
       appBar: AppBar(
         title: Text('Criar Anúncio'),
@@ -27,7 +30,7 @@ class CreateScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ImagesField(),
+            ImagesField(createStore),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Titulo*',

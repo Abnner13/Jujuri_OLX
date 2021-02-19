@@ -82,6 +82,7 @@ class ImageSourceModal extends StatelessWidget {
           cancelButtonTitle: 'Cancelar',
           doneButtonTitle: 'Concluir'),
     );
+    if (croppedFile == null) return;
     onImageSelected(croppedFile);
   }
 }
