@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jujuri_mobx/Components/CustomDrawer/CustomDrawer.dart';
+import 'package:jujuri_mobx/Screens/Create/components/ImagesField.dart';
 
 class CreateScreen extends StatelessWidget {
   final labelStyle = TextStyle(
@@ -19,12 +20,14 @@ class CreateScreen extends StatelessWidget {
       ),
       drawer: CustomDrawer(),
       body: Card(
+        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 8,
         margin: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            ImagesField(),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Titulo*',
