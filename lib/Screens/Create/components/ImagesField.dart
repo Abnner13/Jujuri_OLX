@@ -7,6 +7,10 @@ import 'package:jujuri_mobx/Screens/Create/components/ImageSourceModal.dart';
 class ImagesField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    void onImageSelected(File image) {
+      Navigator.of(context).pop();
+    }
+
     return Container(
       color: Colors.grey[200],
       height: 120,
@@ -20,10 +24,12 @@ class ImagesField extends StatelessWidget {
               onTap: () {
                 if (Platform.isAndroid) {
                   showModalBottomSheet(
-                      context: context, builder: (_) => ImageSourceModal());
+                      context: context,
+                      builder: (_) => ImageSourceModal(onImageSelected));
                 } else {
                   showCupertinoModalPopup(
-                      context: context, builder: (_) => ImageSourceModal());
+                      context: context,
+                      builder: (_) => ImageSourceModal(onImageSelected));
                 }
               },
               child: CircleAvatar(
