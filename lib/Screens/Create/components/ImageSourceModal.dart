@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageSourceModal extends StatelessWidget {
   @override
@@ -15,11 +15,11 @@ class ImageSourceModal extends StatelessWidget {
           children: [
             FlatButton(
               child: const Text('Câmera'),
-              onPressed: () {},
+              onPressed: getFromCamera,
             ),
             FlatButton(
               child: const Text('Galeria'),
-              onPressed: () {},
+              onPressed: getFromGallery,
             ),
           ],
         ),
@@ -33,20 +33,35 @@ class ImageSourceModal extends StatelessWidget {
             'Cancelar',
             style: TextStyle(color: Colors.red),
           ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: Navigator.of(context).pop,
         ),
         actions: [
           CupertinoActionSheetAction(
             child: const Text('Câmera'),
-            onPressed: () {},
+            onPressed: getFromCamera,
           ),
           CupertinoActionSheetAction(
             child: const Text('Galeria'),
-            onPressed: () {},
+            onPressed: getFromGallery,
           )
         ],
       );
+  }
+
+  Future<void> getFromCamera() async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.camera);
+    final image = File(pickedFile.path);
+    imageSelected(image);
+  }
+
+  Future<void> getFromGallery() async {
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    final image = File(pickedFile.path);
+    imageSelected(image);
+  }
+
+  void imageSelected(File image) {
+    print(image.path);
   }
 }
